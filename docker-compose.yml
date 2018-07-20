@@ -6,7 +6,7 @@ services:
       ports:
         - "8000:80"
       volumes:
-        - /var/www/urbansky7/:/usr/share/nginx/html/
+        - ./src/:/usr/share/nginx/html/
         - ./site.conf:/etc/nginx/conf.d/site.conf
       links:
         - php
@@ -15,7 +15,7 @@ services:
         container_name: database
         command: mysqld --sql_mode=""
         volumes:
-            - /var/www/mysql-db:/var/lib/mysql
+            - ./mysql-db:/var/lib/mysql
             #- ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
         environment:
             MYSQL_ROOT_PASSWORD: password123
@@ -27,7 +27,7 @@ services:
       container_name: php-fpm
       volumes:
         - ./php.ini:/usr/local/etc/php/conf.d/php.ini
-        - /var/www/urbansky7/:/usr/share/nginx/html/
+        - ./src/:/usr/share/nginx/html/
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
